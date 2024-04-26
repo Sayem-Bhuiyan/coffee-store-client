@@ -5,7 +5,7 @@ const AddCoffee = () => {
     const handleAddCoffee = e => {
         e.preventDefault();
         const form = e.target;
-        const coffeeName = form.coffeeName.vlaue;
+        const coffeeName = form.coffeeName.value;
         const quantity = form.quantity.value;
         const supplierName = form.supplierName.value;
         const taste = form.taste.value;
