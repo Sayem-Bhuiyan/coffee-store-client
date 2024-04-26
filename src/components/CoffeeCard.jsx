@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee , coffees,  setCoffees}) => {
   const {
     _id,
     coffeeName,
@@ -40,6 +40,8 @@ const CoffeeCard = ({ coffee }) => {
             icon: "success",
             
           });
+          const remaining = coffees.filter(coff => coff._id !== _id)
+          setCoffees(remaining)
          }
         })
       }
@@ -77,6 +79,8 @@ const CoffeeCard = ({ coffee }) => {
 };
 CoffeeCard.propTypes = {
   coffee: PropTypes.object,
+  coffees: PropTypes.array,
+  setCoffees: PropTypes.func,
 };
 
 export default CoffeeCard;

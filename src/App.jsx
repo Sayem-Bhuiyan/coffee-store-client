@@ -10,11 +10,11 @@ function App() {
   return (
     <>
       
-      <h1 className='text-4xl text-purple-600 font-bold'>Coffee Store: {loadedCoffees.length}</h1>
+      <h1 className='text-4xl text-purple-600 font-bold'>Coffee Store: {coffees.length}</h1>
       
       <div className='grid grid-cols-1 md:grid-cols-2'>
         {
-          coffees.map(coffee => <CoffeeCard key={coffee._id} coffee = {coffee} />)
+          coffees.map(coffee => <CoffeeCard key={coffee._id} coffee = {coffee} coffees={coffees} setCoffees={setCoffees} />)
         }
       </div>
     </>
