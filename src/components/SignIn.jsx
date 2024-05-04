@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const SignIn = () => {
   const { singInUser } = useContext(AuthContext);
@@ -19,18 +20,26 @@ const SignIn = () => {
         const user = {
             email, lastSignIn
         }
-        // Update last logged in at the database
-        fetch('http://localhost:5000/user', {
-            method: "PATCH",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-        .then(res => res.json())
+
+        // patch data using axios
+        axios.patch('http://localhost:5000/user', user)
         .then(data => {
-            console.log(data);
+          console.log(data.data)
         })
+
+
+        // Update last logged in at the database using fetch
+        // fetch('http://localhost:5000/user', {
+        //     method: "PATCH",
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(user)
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //     console.log(data);
+        // })
 
         Swal.fire({
             title: 'Success',

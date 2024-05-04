@@ -1,6 +1,7 @@
-import {  useContext } from "react";
+import {  useContext, useEffect } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const SignUp = () => {
     const {createUser} = useContext(AuthContext)
@@ -17,25 +18,33 @@ const SignUp = () => {
             console.log(lastSignIn);
             console.log(result);
             const user ={ email, createdAt: createdAt, lastSignIn: lastSignIn};
-            fetch('http://localhost:5000/user', {
-                method: "POST", 
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-            .then(res => res.json())
+
+            // using Axios
+            axios.post('http://localhost:5000/user', user)
             .then(data => {
-                console.log(data);
-                if(data.insertedId){
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'Account Created Successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Okay'
-                      })
-                }
+              console.log(data.data);
             })
+
+            // usging fetch
+            // fetch('http://localhost:5000/user', {
+            //     method: "POST", 
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(user)
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     console.log(data);
+            //     if(data.insertedId){
+            //         Swal.fire({
+            //             title: 'Success',
+            //             text: 'Account Created Successfully',
+            //             icon: 'success',
+            //             confirmButtonText: 'Okay'
+            //           })
+            //     }
+            // })
             form.reset()
         })
         .catch(error => {
